@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shanthan</title>
+  
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23ff3e3e%22></rect><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22central%22 text-anchor=%22middle%22 font-size=%2270%22 font-weight=%22bold%22 fill=%22white%22 font-family=%22sans-serif%22>S</text></svg>">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050505;
+      --panel: rgba(20, 20, 20, 0.7);
+      --text: #ffffff;
+      --muted: #888888;
+      --accent: #ff3e3e;
+      --border: rgba(255, 255, 255, 0.1);
+      --glass: rgba(255, 255, 255, 0.03);
+    }
+
+    * { box-sizing: border-box; scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      background-image: 
+        radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
+      background-size: 32px 32px;
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    /* --- HERO --- */
+    header { padding: 100px 0 60px; }
+
+    .status-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--glass); border: 1px solid var(--border);
+      padding: 6px 12px; border-radius: 100px;
+      font-family: "JetBrains Mono", monospace; font-size: 0.75rem;
+      color: var(--accent); margin-bottom: 24px;
+    }
+
+    .status-dot {
+      width: 6px; height: 6px; background: var(--accent);
+      border-radius: 50%; box-shadow: 0 0 8px var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 8vw, 5rem); font-weight: 700;
+      margin: 0; letter-spacing: -3px; line-height: 1.05;
+    }
+
+    .subtitle {
+      color: var(--muted); font-size: 1.1rem;
+      margin-top: 20px; max-width: 500px;
+    }
+
+    nav {
+      margin-top: 40px; display: flex; gap: 32px;
+    }
+    nav a {
+      color: var(--text); text-decoration: none;
+      font-size: 0.9rem; font-weight: 500;
+      opacity: 0.6; transition: 0.3s;
+    }
+    nav a:hover { opacity: 1; color: var(--accent); }
+
+    /* --- SECTION STYLING --- */
+    section { margin-bottom: 100px; }
+
+    .section-label {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 1rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 1px;
+      color: var(--accent); margin-bottom: 32px;
+      display: flex; align-items: center; gap: 16px;
+    }
+
+    .section-label::after {
+      content: ""; height: 1px; flex-grow: 1;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      opacity: 0.3;
+    }
+
+    p { color: var(--muted); font-size: 1.1rem; max-width: 700px; }
+
+    /* --- BENTO GRID LAYOUT (PROJECTS) --- */
+    .work-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr; 
+      gap: 16px;
+    }
+
+    /* Make the 3rd item span full width */
+    .work-card:nth-child(3) {
+      grid-column: span 2;
+    }
+
+    .work-card {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      padding: 32px;
+      border-radius: 20px;
+      transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      display: flex;
+      flex-direction: column; 
+      justify-content: space-between;
+      min-height: 200px;
+    }
+
+    .work-card:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: var(--accent);
+      transform: translateY(-5px);
+    }
+
+    .work-card h3 { margin: 0 0 12px; font-size: 1.4rem; letter-spacing: -0.5px; }
+    .work-card p { margin: 0; font-size: 0.95rem; line-height: 1.6; }
+    
+    .card-number {
+      color: var(--accent); 
+      font-family: 'JetBrains Mono'; 
+      font-weight: 600; 
+      margin-top: 24px;
+      align-self: flex-end; 
+    }
+
+    /* --- SKILLS --- */
+    .skills-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .skill-pill {
+      padding: 8px 18px;
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.85rem;
+      transition: 0.3s;
+    }
+
+    .skill-pill:hover {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    /* --- CERTIFICATIONS GRID --- */
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); 
+      gap: 16px;
+      align-items: stretch; 
+    }
+
+    .cert-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 28px;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 180px;
+      transition: 0.3s ease;
+      text-decoration: none; 
+      color: inherit;
+    }
+
+    .cert-card:hover {
+      border-color: var(--accent);
+      background: rgba(255, 62, 62, 0.05);
+      transform: translateY(-5px);
+    }
+
+    .cert-org { 
+      font-size: 0.75rem; 
+      color: var(--accent); 
+      font-family: "JetBrains Mono", monospace; 
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      display: block;
+    }
+    
+    .cert-name { 
+      font-weight: 700; 
+      font-size: 1.1rem; 
+      line-height: 1.3; 
+    }
+
+    /* Improved Arrow Styling */
+    .cert-link-text {
+      margin-top: 20px;
+      font-size: 0.8rem;
+      color: var(--accent); 
+      font-family: 'JetBrains Mono'; 
+      display: flex; 
+      align-items: center; 
+      gap: 8px; /* Added more space between text and arrow */
+      opacity: 0.8;
+      transition: 0.3s;
+    }
+
+    .cert-arrow {
+      font-size: 1.25rem; /* Significantly larger arrow */
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .cert-card:hover .cert-link-text {
+      opacity: 1;
+    }
+
+    /* Animation: Arrow moves up-right on hover */
+    .cert-card:hover .cert-arrow {
+      transform: translate(3px, -3px); 
+    }
+
+    /* --- CONTACT --- */
+    .contact-wrapper {
+      background: var(--accent);
+      padding: 80px 40px;
+      border-radius: 32px;
+      color: white;
+      text-align: center;
+      margin-top: 40px;
+    }
+    .contact-wrapper h2 { font-size: 3.5rem; margin: 0 0 16px; letter-spacing: -2px; line-height: 1; }
+    
+    .email-btn {
+      display: inline-block; background: white; color: black;
+      padding: 18px 36px; border-radius: 14px; text-decoration: none;
+      font-weight: 700; margin: 32px 0; transition: 0.3s;
+    }
+    .email-btn:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+
+    .social-links { display: flex; justify-content: center; gap: 32px; }
+    .social-icon img { width: 28px; height: 28px; filter: invert(1); opacity: 1; transition: 0.3s; }
+    .social-icon:hover img { transform: translateY(-5px); opacity: 0.7; }
+
+    footer {
+      text-align: center; padding: 60px 0 40px;
+      font-family: "JetBrains Mono", monospace; font-size: 0.75rem;
+      color: var(--muted); text-transform: uppercase; letter-spacing: 1px;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+      .work-grid, .cert-grid { grid-template-columns: 1fr; }
+      .work-card:nth-child(3) { grid-column: span 1; }
+      .contact-wrapper h2 { font-size: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="status-badge">
+        <div class="status-dot"></div>
+        Available for collaboration
+      </div>
+      <h1>Shanthan.</h1>
+      <div class="subtitle">BTech Student · Developer · Focused on scalable systems and data-driven logic.</div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#work">Projects</a>
+        <a href="#skills">Tech Stack</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section id="about">
+      <span class="section-label">01 // About me</span>
+      <p>
+        I enjoy building systems that are clean, logical, and performant. My background 
+        is in engineering, and I'm currently expanding my expertise in machine learning 
+        and data architecture.
+      </p>
+    </section>
+
+    <section id="work">
+      <span class="section-label">02 // Projects</span>
+      <div class="work-grid">
+        
+        <div class="work-card">
+          <div>
+            <h3>Data Analysis</h3>
+            <p>Transforming complex datasets into clear narratives using Python.</p>
+          </div>
+          <div class="card-number">01</div>
+        </div>
+
+        <div class="work-card">
+          <div>
+            <h3>Web Development</h3>
+            <p>Creating lightweight, accessible, and fast web experiences.</p>
+          </div>
+          <div class="card-number">02</div>
+        </div>
+
+        <div class="work-card">
+          <div>
+            <h3>ML Engineering</h3>
+            <p>Developing and optimizing predictive models for real-world data application and pipeline management.</p>
+          </div>
+          <div class="card-number">03</div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="skills">
+      <span class="section-label">03 // Tech Stack</span>
+      <div class="skills-container">
+        <span class="skill-pill">Python</span>
+        <span class="skill-pill">Pandas</span>
+        <span class="skill-pill">NumPy</span>
+        <span class="skill-pill">SQL</span>
+      </div>
+    </section>
+
+    <section id="certifications">
+      <span class="section-label">04 // Certifications</span>
+      <div class="cert-grid">
+        
+        <div class="cert-card">
+          <div>
+            <span class="cert-org">Kaggle</span>
+            <span class="cert-name">Intro to Machine Learning</span>
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <div>
+            <span class="cert-org">Kaggle</span>
+            <span class="cert-name">Intermediate Machine Learning</span>
+          </div>
+        </div>
+        
+        <a href="https://coursera.org/share/ced72511d692d10b7284e53705fef3f1" class="cert-card" target="_blank">
+          <div>
+            <span class="cert-org">Andrew Ng // Coursera</span>
+            <span class="cert-name">Supervised Machine Learning: Regression and Classification</span>
+          </div>
+          <span class="cert-link-text">
+            View Credential <span class="cert-arrow">↗</span>
+          </span>
+        </a>
+
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="contact-wrapper">
+        <h2>Let's build something great.</h2>
+        <p style="color: #fff; opacity: 0.9; margin: 0 auto; max-width: 450px;">I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
+        
+        <a href="mailto:shanthan.yxo@gmail.com" class="email-btn">Send me an Email</a>
+        
+        <div class="social-links">
+          <a href="https://github.com/shanthan5589" target="_blank" class="social-icon"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" alt="GitHub"></a>
+          <a href="https://www.linkedin.com/in/shanthan5589/" target="_blank" class="social-icon"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn"></a>
+          <a href="https://x.com/shanthan5589" target="_blank" class="social-icon"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" alt="X (Twitter)"></a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © 2026 SHANTHAN // BUILT SLOWLY, ON PURPOSE.
+    </footer>
+  </div>
+
+</body>
+</html>
