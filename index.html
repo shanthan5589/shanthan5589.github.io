@@ -101,11 +101,7 @@
       gap: 16px;
     }
 
-    /* Make the 3rd item span full width */
-    .work-card:nth-child(3) {
-      grid-column: span 2;
-    }
-
+    /* Updated to allow 'a' tags to act as cards */
     .work-card {
       background: var(--glass);
       border: 1px solid var(--border);
@@ -116,6 +112,8 @@
       flex-direction: column; 
       justify-content: space-between;
       min-height: 200px;
+      text-decoration: none; /* Remove underline if it's a link */
+      color: inherit;       /* Inherit text color */
     }
 
     .work-card:hover {
@@ -125,7 +123,7 @@
     }
 
     .work-card h3 { margin: 0 0 12px; font-size: 1.4rem; letter-spacing: -0.5px; }
-    .work-card p { margin: 0; font-size: 0.95rem; line-height: 1.6; }
+    .work-card p { margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--muted); }
     
     .card-number {
       color: var(--accent); 
@@ -134,6 +132,23 @@
       margin-top: 24px;
       align-self: flex-end; 
     }
+
+    /* Reuse arrow styling for work cards */
+    .work-link-text {
+      margin-top: 20px;
+      font-size: 0.8rem;
+      color: var(--accent); 
+      font-family: 'JetBrains Mono'; 
+      display: flex; 
+      align-items: center; 
+      gap: 8px;
+      opacity: 0.8;
+      transition: 0.3s;
+    }
+    
+    .work-card:hover .work-link-text { opacity: 1; }
+    .work-card:hover .cert-arrow { transform: translate(3px, -3px); }
+
 
     /* --- SKILLS --- */
     .skills-container {
@@ -264,7 +279,6 @@
 
     @media (max-width: 768px) {
       .work-grid, .cert-grid { grid-template-columns: 1fr; }
-      .work-card:nth-child(3) { grid-column: span 1; }
       .contact-wrapper h2 { font-size: 2.5rem; }
     }
   </style>
@@ -291,9 +305,9 @@
     <section id="about">
       <span class="section-label">01 // About me</span>
       <p>
-        I enjoy building systems that are clean, logical, and performant. My background 
-        is in engineering, and I'm currently expanding my expertise in machine learning 
-        and data architecture.
+        I build clean, logical, and performant systems. Currently expanding my expertise in machine 
+        learning and data preprocessing; I enjoy turning data into reliable, production-ready models and 
+        pipelines.
       </p>
     </section>
 
@@ -301,29 +315,19 @@
       <span class="section-label">02 // Projects</span>
       <div class="work-grid">
         
-        <div class="work-card">
+        <a href="https://github.com/shanthan5589/house-price-prediction" target="_blank" class="work-card" style="grid-column: 1 / -1;">
           <div>
-            <h3>Data Analysis</h3>
-            <p>Transforming complex datasets into clear narratives using Python.</p>
+            <h3>House Price Prediction</h3>
+            <p>
+              Developed an optimized regression model achieving a best MAE of ~16,606. 
+              Evaluated multiple strategies for missing value imputation and categorical data 
+              handling (Ordinal vs. One-Hot Encoding) to maximize accuracy.
+            </p>
           </div>
-          <div class="card-number">01</div>
-        </div>
-
-        <div class="work-card">
-          <div>
-            <h3>Web Development</h3>
-            <p>Creating lightweight, accessible, and fast web experiences.</p>
-          </div>
-          <div class="card-number">02</div>
-        </div>
-
-        <div class="work-card">
-          <div>
-            <h3>ML Engineering</h3>
-            <p>Developing and optimizing predictive models for real-world data application and pipeline management.</p>
-          </div>
-          <div class="card-number">03</div>
-        </div>
+          <span class="work-link-text">
+            View Source <span class="cert-arrow">↗</span>
+          </span>
+        </a>
 
       </div>
     </section>
