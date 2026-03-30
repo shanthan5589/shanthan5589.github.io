@@ -257,6 +257,7 @@ section { margin-bottom: 160px; }
 }
 
 .scroll-viewport {
+  max-height: 800px;
   overflow-y: auto;
   overflow-x: visible;
   padding: 24px 12px 28px 0;
@@ -282,7 +283,7 @@ section { margin-bottom: 160px; }
   position: relative;
   overflow: hidden;
   height: auto;
-  min-height: 550px;
+  min-height: 520px;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
   will-change: transform;
 }
