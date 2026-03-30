@@ -257,7 +257,7 @@ section { margin-bottom: 160px; }
 }
 
 .scroll-viewport {
-  max-height: 700px;
+  max-height: 800px;
   overflow-y: auto;
   overflow-x: visible;
   padding: 24px 12px 28px 0;
