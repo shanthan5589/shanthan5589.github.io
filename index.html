@@ -98,9 +98,9 @@
             <!-- <span class="work-meta-pill">Top 300 on Kaggle</span> -->
           </div>
           <p>
-          A modern React-based faculty tracking system that helps students locate professors across campus in real-time.
-          It features schedule-based location prediction, interactive campus maps, and automated schedule generation with
-          a beautiful dark-themed UI built using TypeScript, Tailwind CSS, and shadcn/ui components.
+          A modern React-based faculty tracking system that helps students locate professors across large 
+          university campuses in real-time. Features admin tools for managing schedules and faculty profiles,
+          ensuring accurate real-time location updates and smoother student-faculty interactions.
           </p>
           <div class="work-footer">
             <span>React · Backend</span>
@@ -109,16 +109,17 @@
         </a>
 
         <a href="https://github.com/shanthan5589/mitosis-detector" target="_blank" class="work-card">
-          <div class="work-tagline">Binary Classification</div>
+          <div class="work-tagline">Two-Stage Pipeline</div>
           <div class="work-title-row">
             <h3>Mitotic Detector</h3>
             <!-- <span class="work-meta-pill">Top 300 on Kaggle</span> -->
           </div>
           <p>
-          Mitosis detection in histopathology slides using ResNet18. Built the full preprocessing pipeline from scratch
-          which handles gigabytes of data, extracting 146K raw patches and filtering 54% of the data using different filters
-          across 21 training slides. Used slide-level train/val splits to prevent data leakage across whole-slide images.
-          Performance limited by domain shift across slides — documented in the README.
+          A two-stage pipeline that takes a whole-slide pathology image as input and 
+          outputs the precise coordinates of mitotic figures on the slide, automating a task that 
+          pathologists currently perform manually. By combining YOLO and EfficientNet-B2 classifier, 
+          the system distinguishes true mitotic figures across unseen slides with different staining 
+          characteristics. Achieved F1 of 0.774 on 11 fully held-out test slides.
           </p>
           <div class="work-footer">
             <span>Medical Imaging</span>
